@@ -43,7 +43,7 @@ public class GreetingBatchBean {
 		logger.info("< fixedRateJobWithInitialDelay");
 	}
 	
-	//@Scheduled(initialDelay = 5000, fixedDelay = 15000)
+	@Scheduled(initialDelay = 5000, fixedDelay = 15000)
 	public void fixedDelayWithImitialDelay() {
 		logger.info("> fixedDelayWithImitialDelay");
 		
