@@ -15,19 +15,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  */
 @SpringBootApplication
-@EnableTransactionManagement
-@EnableCaching
-@EnableScheduling
 public class Application {
 	
 	public static void main(String[] args) throws Exception{
 		SpringApplication.run(Application.class, args);
-	}
-	
-	@Bean
-	public CacheManager cacheManager() {
-		GuavaCacheManager cacheManager = new GuavaCacheManager("greetings");
-		return cacheManager;
-	}
-
+	}	
 }
