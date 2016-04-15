@@ -29,7 +29,7 @@ public class GreetingController {
 	}
 	
 	@RequestMapping(value = "/api/greetings/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Greeting> getGreeting(@PathVariable("id") BigInteger id) {
+	public ResponseEntity<Greeting> getGreeting(@PathVariable("id") Long id) {
 		Greeting greeting = greetingService.findOne(id);
 		if (greeting == null) {
 			return new ResponseEntity<Greeting>(HttpStatus.NOT_FOUND);
@@ -54,7 +54,7 @@ public class GreetingController {
 	}
 	
 	@RequestMapping(value = "/api/greetings/{id}", method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Greeting> deleteGreeting(@PathVariable("id") BigInteger id, @RequestBody Greeting greeting) {
+	public ResponseEntity<Greeting> deleteGreeting(@PathVariable("id") Long id, @RequestBody Greeting greeting) {
 		greetingService.delete(id);
 		return new ResponseEntity<Greeting>(HttpStatus.NO_CONTENT);
 	}

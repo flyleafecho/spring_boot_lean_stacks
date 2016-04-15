@@ -9,11 +9,11 @@ public interface GreetingService {
 
 	Collection<Greeting> findAll();
 	
-	Greeting findOne(BigInteger id);
+	Greeting findOne(Long id);
 	
 	Greeting create(Greeting greeting);
 	
 	Greeting update(Greeting greeting);
 	
-	void delete(BigInteger id);
+	void delete(Long id);
 }
