@@ -1,2 +1,2 @@
 INSERT INTO Greeting (text) VALUES ('Hello World!');
-INSERT INTO Greeting (text) VALUES ('Olá mundo!');
+INSERT INTO Greeting (text) VALUES ('Ola mundo!');

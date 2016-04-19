@@ -2,6 +2,9 @@ package org.example.ws.service;
 
 import java.util.Collection;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.NoResultException;
+
 import org.example.ws.model.Greeting;
 import org.example.ws.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +42,7 @@ public class GreetingServiceBean implements GreetingService {
 	public Greeting create(Greeting greeting) {
 		if (greeting.getId() != null) {
 			// Cannot create existing greeting
-			return null;
+			throw new EntityExistsException("Cannot create new Greeting with supplied id. The attribute id must be null");
 		}
 		Greeting savedGreeting = greetingRepository.save(greeting);		
 		return savedGreeting;
@@ -52,7 +55,7 @@ public class GreetingServiceBean implements GreetingService {
 		Greeting greetingPersisted = findOne(greeting.getId());
 		if (greetingPersisted == null) {
 			//Cannot update Greeting that has not persisted
-			return null;
+			throw new NoResultException("Cannot update a Greeting object without any id. The attribute id must not be null");
 		}
 		Greeting updatedGreeting = greetingRepository.save(greeting);
 		return updatedGreeting;
