@@ -1,6 +1,5 @@
 package org.example.ws.service;
 
-import java.math.BigInteger;
 import java.util.Collection;
 
 import org.example.ws.model.Greeting;

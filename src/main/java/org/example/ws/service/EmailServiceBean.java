@@ -58,7 +58,7 @@ public class EmailServiceBean implements EmailService {
 			response.completeExceptionally(e);
 		}
 		logger.info("< sendAsyncWithResult");
-		return null;
+		return response;
 	}
 
 }
