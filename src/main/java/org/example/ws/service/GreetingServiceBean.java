@@ -8,6 +8,7 @@ import javax.persistence.NoResultException;
 import org.example.ws.model.Greeting;
 import org.example.ws.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,10 +22,14 @@ public class GreetingServiceBean implements GreetingService {
 
 	@Autowired
 	private GreetingRepository greetingRepository;
+	
+	@Autowired
+	private CounterService counterService;
 
 	
 	@Override
 	public Collection<Greeting> findAll() {
+		counterService.increment("method.invoked.greetingServiceBean.findAll");
 		Collection<Greeting> greetings = greetingRepository.findAll();
 		return greetings;
 	}
@@ -32,6 +37,7 @@ public class GreetingServiceBean implements GreetingService {
 	@Override
 	@Cacheable(value = "greetings", key = "#id")
 	public Greeting findOne(Long id) {
+		counterService.increment("method.invoked.greetingServiceBean.findOne");
 		Greeting greeting = greetingRepository.findOne(id);		
 		return greeting;
 	}
@@ -40,6 +46,7 @@ public class GreetingServiceBean implements GreetingService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@CachePut(value = "greetings", key ="#result.id")
 	public Greeting create(Greeting greeting) {
+		counterService.increment("method.invoked.greetingServiceBean.create");
 		if (greeting.getId() != null) {
 			// Cannot create existing greeting
 			throw new EntityExistsException("Cannot create new Greeting with supplied id. The attribute id must be null");
@@ -52,6 +59,7 @@ public class GreetingServiceBean implements GreetingService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@CachePut(value = "greetings", key ="#greeting.id")
 	public Greeting update(Greeting greeting) {
+		counterService.increment("method.invoked.greetingServiceBean.update");
 		Greeting greetingPersisted = findOne(greeting.getId());
 		if (greetingPersisted == null) {
 			//Cannot update Greeting that has not persisted
@@ -65,6 +73,7 @@ public class GreetingServiceBean implements GreetingService {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly = false)
 	@CacheEvict(value = "greetings", key = "#id")
 	public void delete(Long id) {
+		counterService.increment("method.invoked.greetingServiceBean.delete");
 		greetingRepository.delete(id);
 	}
 	
