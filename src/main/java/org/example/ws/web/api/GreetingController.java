@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GreetingController {
+public class GreetingController extends BaseController{
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
