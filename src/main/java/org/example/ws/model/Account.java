@@ -102,5 +102,13 @@ public class Account {
 	public void setLocked(boolean locked) {
 		this.locked = locked;
 	}
+	
+	public Set<Role> getRoles() {
+		return roles;
+	}
+	
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
 
 }
